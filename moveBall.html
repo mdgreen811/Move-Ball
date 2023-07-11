@@ -1,0 +1,42 @@
+<div id="ball1" style="
+  z-index:5;
+  position:absolute;
+  left:0px;
+  top: 200px;
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  background:green"></div>
+
+<script>
+var xPosition = 0;
+var yPosition = 0;
+var xVelocity = 5;
+var yVelocity = 3;
+var ball = document.getElementById('ball1');
+var maxXPosition = 200; // Maximum X position
+var maxYPosition = 200; // Maximum Y position
+var minXPosition = 0; // Minimum X position
+var minYPosition = 0; // Minimum Y position
+
+function moveBall() {
+  xPosition = xPosition + xVelocity;
+  yPosition = yPosition + yVelocity;
+  
+  // Check for X-axis boundaries
+  if (xPosition >= maxXPosition || xPosition <= minXPosition) {
+    xVelocity = -xVelocity; // Reverse X velocity
+  }
+
+  // Check for Y-axis boundaries
+  if (yPosition >= maxYPosition || yPosition <= minYPosition) {
+    yVelocity = -yVelocity; // Reverse Y velocity
+  }
+  
+  ball.style.left = xPosition + 'px';
+  ball.style.top = yPosition + 'px';
+}
+
+
+setInterval(moveBall, 20); // Update the ball position every 20 milliseconds
+</script>

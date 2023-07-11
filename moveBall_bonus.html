@@ -1,0 +1,69 @@
+<div id="ball1" class="ball" style="
+  z-index: 5;
+  position: absolute;
+  left: 0px;
+  top: 200px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: green;
+"></div>
+
+<div id="ball2" class="ball" style="
+  z-index: 5;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: blue;
+"></div>
+
+<div id="ball3" class="ball" style="
+  z-index: 5;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: orange;
+"></div>
+
+<script>
+  var balls = [
+    { id: 'ball1', xPosition: 0, yPosition: 0, xVelocity: 5, yVelocity: 3 },
+    { id: 'ball2', xPosition: 0, yPosition: 0, xVelocity: 2, yVelocity: 4 },
+    { id: 'ball3', xPosition: 0, yPosition: 0, xVelocity: 3, yVelocity: 2 }
+  ];
+
+  balls.forEach(function(ball) {
+    ball.element = document.getElementById(ball.id);
+  });
+
+  var maxXPosition = 200; // Maximum X position
+  var maxYPosition = 200; // Maximum Y position
+  var minXPosition = 0; // Minimum X position
+  var minYPosition = 0; // Minimum Y position
+
+  function moveBall(ball) {
+    ball.xPosition = ball.xPosition + ball.xVelocity;
+    ball.yPosition = ball.yPosition + ball.yVelocity;
+
+    // Check for X-axis boundaries
+    if (ball.xPosition >= maxXPosition || ball.xPosition <= minXPosition) {
+      ball.xVelocity = -ball.xVelocity; // Reverse X velocity
+    }
+
+    // Check for Y-axis boundaries
+    if (ball.yPosition >= maxYPosition || ball.yPosition <= minYPosition) {
+      ball.yVelocity = -ball.yVelocity; // Reverse Y velocity
+    }
+
+    ball.element.style.left = ball.xPosition + 'px';
+    ball.element.style.top = ball.yPosition + 'px';
+  }
+
+  setInterval(function() {
+    balls.forEach(function(ball) {
+      moveBall(ball);
+    });
+  }, 20); // Update the ball positions every 20 milliseconds
+</script>
